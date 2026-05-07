@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express, {Request, Response} from 'express'
 const app = express()
-const PORT: number = Number(process.env.PORT)
+const PORT: number = Number(process.env.PORT) || 8000
 
 app.use(express.json())
 
