@@ -1,6 +1,7 @@
 import pool from '../db/connection.js'
 import type {ResultSetHeader, RowDataPacket} from 'mysql2'
 import type {Request, Response} from 'express'
+import {AuthRequest} from '../middleware/authMiddleware.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -83,6 +84,29 @@ export const loginHandler = async (req: Request <{},{} , loginBody>, res: Respon
         
 
     } 
+    catch(err) {
+        console.log(err)
+        return res.status(500).json({error: "Server side error"})
+    }
+}
+
+export const myRoute = async (req: AuthRequest, res: Response) => {
+    try {
+        if(!req.user || typeof req.user === 'string'){
+            return res.status(401).json({ message: 'Not authorized' })
+        }
+        const [results] = await pool.query<UserRow[]>("SELECT * FROM users WHERE id = ?", [req.user.id])
+
+        if(results.length === 0){
+            return res.status(404).json({ message: 'User not found' })
+        }
+        
+        const user = results[0]
+
+        return res.status(200).json({Message: "Welcome " + user.name, id: user.id, email: user.email})
+        
+    }  
+    
     catch(err) {
         console.log(err)
         return res.status(500).json({error: "Server side error"})

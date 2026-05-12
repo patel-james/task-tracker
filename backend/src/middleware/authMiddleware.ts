@@ -1,7 +1,7 @@
 import jwt, {JwtPayload} from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 
-type AuthRequest = Request & {
+export type AuthRequest = Request & {
     user?: string | JwtPayload
 }
 
