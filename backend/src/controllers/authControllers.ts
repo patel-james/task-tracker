@@ -92,7 +92,7 @@ export const loginHandler = async (req: Request <{},{} , loginBody>, res: Respon
 
 export const myRoute = async (req: AuthRequest, res: Response) => {
     try {
-        if(!req.user || typeof req.user === 'string'){
+        if (!req.user) {
             return res.status(401).json({ message: 'Not authorized' })
         }
         const [results] = await pool.query<UserRow[]>("SELECT * FROM users WHERE id = ?", [req.user.id])
