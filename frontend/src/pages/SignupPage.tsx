@@ -51,7 +51,7 @@ export default function SignupPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Create Account</button>
+        <button type="submit">Sign up</button>
       </form>
 
       {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
