@@ -18,7 +18,7 @@ export default function SignupPage() {
     const data = await signup(name, email, password)
 
     if (data.UserId) {
-      setSuccess('Account created! Redirecting to login...')
+      setSuccess('Account created! Trasnfering you to Login page ;)')
       setTimeout(() => navigate('/login'), 1500)
     } else {
       setError(data.message || 'Signup failed')
