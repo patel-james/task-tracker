@@ -23,10 +23,10 @@ app.get('/test', (_req: Request, res: Response) => {
 app.get('/test-db', async (_req: Request, res: Response) => {
   try {
     const [row] = await pool.query('SELECT 1 AS Good')
-    return res.status(200).json({ message: 'DB connected', row })
+    return res.status(200).json({ message: 'Database connected', row })
   } catch (err) {
     console.log(err)
-    res.status(500).json({ message: 'Failed to connect to DB' })
+    res.status(500).json({ message: 'Failed to connect to Database' })
   }
 })
 
